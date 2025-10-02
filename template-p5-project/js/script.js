@@ -8,6 +8,13 @@
 
 "use strict";
 
+
+
+let brightness = undefined;
+let saturation = undefined;
+
+
+
 /**
  * OH LOOK I DIDN'T DESCRIBE SETUP!!
 */
@@ -20,8 +27,11 @@ function setup() {
 
     // this was also copied from the same place
   // Set the color mode to hue-saturation-brightness (HSB)
-  colorMode(RGB);
+  colorMode(HSB);
+
+
 }
+
 
 
 
@@ -34,14 +44,18 @@ function draw() {
       // Clear the background
   background(0);
 
-    radiant()
+    radiant();
 
-    heart()
-}
+    heart();
+
+ brightness = map(sin(frameCount * 0.05), -1, 1, 85, 150);
+ saturation = map(sin(frameCount * 0.9), -1, 1, 50, 400);
+
+ }
 
 function heart() {
     noStroke();
-    fill(64, 0, 255)
+    fill(255, saturation, brightness);
     triangle(width/2, height/2 + 33, width/2 + 24.3, height/2 - 10, width/2 - 24.3, height/2 - 10);
     ellipse(width/2 + 12, height/2 - 15, 26);
     ellipse(width/2 - 12, height/2 - 15, 26);
@@ -57,7 +71,7 @@ function radiant() {
       translate(width/2, height/2);
       rotate(angle + frameCount);
 
-      fill(85, 255, 0); 
+      fill(100,saturation,brightness); 
       noStroke();
       arc(-10, 0, 35, 200, 0, 89);
 
@@ -73,7 +87,7 @@ function radiant() {
       translate(width/2, height/2);
       rotate(angle + frameCount * 0.5);
 
-      fill(0, 170, 255); 
+      fill(200,saturation,brightness); 
       noStroke();
       arc(-10, 0, 35, 150, -89, 0);
 

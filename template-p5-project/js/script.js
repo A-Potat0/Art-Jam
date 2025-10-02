@@ -12,7 +12,7 @@
  * OH LOOK I DIDN'T DESCRIBE SETUP!!
 */
 function setup() {
-    createCanvas(400, 400);
+    createCanvas(800, 800);
 }
 
 
@@ -22,4 +22,13 @@ function setup() {
 */
 function draw() {
     background(160, 180, 200);
+    heart()
+}
+
+function heart() {
+    noStroke();
+    fill(255, 100, 150)
+    triangle(400, 395, 426, 350, 374, 350);
+    ellipse(412, 349, 26);
+    ellipse(388, 349, 26);
 }

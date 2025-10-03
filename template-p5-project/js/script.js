@@ -1,5 +1,5 @@
 /**
- * window to the soul
+ * Window To The Soul
  * Anthony Patient
  * 
  * the eye is interactible with a mouse try mouving arround or clicking

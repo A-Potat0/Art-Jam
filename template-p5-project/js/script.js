@@ -145,7 +145,7 @@ function eye() {
 // moves the eyelids
 function blink() {
     translate((width / 2) + ((mouseX - width / 2) / 20), (height / 2) + (mouseY - height / 2) / 20);
-    fill(10, 10, 10);
+    fill(2, 2, 2);
     arc(0, 40, 650, 332, blinking1 + 180, -blinking1 + 0, OPEN);
     arc(0, 40, 650, 162, blinking2 + 0, -blinking2 + 180, OPEN);
 

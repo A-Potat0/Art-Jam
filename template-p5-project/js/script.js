@@ -9,14 +9,19 @@
 "use strict";
 
 
-
+// buch of usfull variables for later
+//these will be used to pulse the colors
 let brightness = undefined;
 let saturation = undefined;
-
-
+//these will be used to blink
+let blinking1 = 18;
+let blinking2 = 6;
+//these variables are for the blinking
+let press = 0
+let timer = 6.3 * 1000; // 3 seconds
 
 /**
- * OH LOOK I DIDN'T DESCRIBE SETUP!!
+ * sets up the canvase and important details of the peice
 */
 function setup() {
     createCanvas(800, 800);
@@ -50,14 +55,28 @@ function draw() {
 
     heart();
 
+    blink()
 
-
+    //pulses the eye color
     brightness = map(sin(frameCount * 0.05), -1, 1, 85, 150);
     saturation = map(sin(frameCount * 0.9), -1, 1, 50, 400);
 
+    //checks if the mouse was clicked before it runs the code
+    if (press === 1) {
 
+        blinking1 = map(sin(frameCount), -1, 1, 0, 35);
+        blinking2 = map(sin(frameCount), -1, 1, 0, 12);
+    }
+    else if (press === 0) {
+        blinking1 = 18;
+        blinking2 = 6;
+    }
+
+    // im just using this to see usfull info
+    print(press)
 }
 
+// makes a heart shape
 function heart() {
     noStroke();
     fill(255, saturation, brightness);
@@ -66,6 +85,7 @@ function heart() {
     ellipse(width / 2 - 12, height / 2 - 15, 26);
 }
 
+// makes the shine arround the heart (i call them spikes)
 function radiant() {
     // Loop through angles 0, 30, 60, 90 degrees
     for (let angle = 0; angle <= 360; angle += 30) {
@@ -101,6 +121,7 @@ function radiant() {
     }
 }
 
+// adds eyelids around the eye
 function eye() {
 
     fill(100, 50, 100)
@@ -114,4 +135,28 @@ function eye() {
 
     fill(100, 10, 100)
     ellipse(width / 2, height / 2, 200, 200)
+}
+
+// moves the eyelids
+function blink() {
+    translate(width / 2, height / 2);
+    fill(10, 10, 10);
+    arc(0, 40, 650, 300, blinking1 + 180, -blinking1 + 0, OPEN);
+    arc(0, 40, 650, 130, blinking2 + 0, -blinking2 + 180, OPEN);
+
+
+}
+
+// changes the variable to false if the timer ends ( this is for press ((for now)))
+function tiemrEnd() {
+    press = 0;
+}
+
+// check ifthe mouse was pressed to activate other code
+function mousePressed() {
+    press = 1;
+    frameCount = 1
+    setTimeout(tiemrEnd, timer);
+
+
 }

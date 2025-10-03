@@ -2,8 +2,8 @@
  * Title of Project
  * Author Name
  * 
- * HOW EMBARRASSING! I HAVE NO DESCRIPTION OF MY PROJECT!
- * PLEASE REMOVE A GRADE FROM MY WORK IF IT'S GRADED!
+ * the eye is interactible with a mouse try mouving arround or clicking
+ * 
  */
 
 "use strict";
@@ -14,8 +14,8 @@
 let brightness = undefined;
 let saturation = undefined;
 //these will be used to blink
-let blinking1 = 18;
-let blinking2 = 6;
+let blinking1 = 35;
+let blinking2 = undefined;
 //these variables are for the blinking
 let press = 0
 let timer = 6.3 * 1000; // 3 seconds
@@ -62,14 +62,16 @@ function draw() {
     saturation = map(sin(frameCount * 0.9), -1, 1, 50, 400);
 
     //checks if the mouse was clicked before it runs the code
-    if (press === 1) {
+    if (press == 1) {
 
-        blinking1 = map(sin(frameCount), -1, 1, 0, 35);
-        blinking2 = map(sin(frameCount), -1, 1, 0, 12);
+        blinking1 = map(cos(frameCount), -1, 1, 0, 35);
+        blinking2 = map(cos(frameCount), -1, 1, 0, 12);
+
     }
+
     else if (press === 0) {
-        blinking1 = 18;
-        blinking2 = 6;
+        blinking1 = 35;
+        blinking2 = 12;
     }
 
     // im just using this to see usfull info
@@ -80,9 +82,9 @@ function draw() {
 function heart() {
     noStroke();
     fill(255, saturation, brightness);
-    triangle(width / 2, height / 2 + 33, width / 2 + 24.3, height / 2 - 10, width / 2 - 24.3, height / 2 - 10);
-    ellipse(width / 2 + 12, height / 2 - 15, 26);
-    ellipse(width / 2 - 12, height / 2 - 15, 26);
+    triangle((width / 2) + ((mouseX - width / 2) / 8), (height / 2 + 33) + (mouseY - height / 2) / 8, (width / 2 + 24.3) + ((mouseX - width / 2) / 8), (height / 2 - 10) + (mouseY - height / 2) / 8, (width / 2 - 24.3) + ((mouseX - width / 2) / 8), (height / 2 - 10) + (mouseY - height / 2) / 8);
+    ellipse((width / 2 + 12) + ((mouseX - width / 2) / 8), (height / 2 - 15) + (mouseY - height / 2) / 8, 26);
+    ellipse((width / 2 - 12) + ((mouseX - width / 2) / 8), (height / 2 - 15) + (mouseY - height / 2) / 8, 26);
 }
 
 // makes the shine arround the heart (i call them spikes)
@@ -93,7 +95,9 @@ function radiant() {
         push();
 
         // Translate to center of canvas and rotate by angle
-        translate(width / 2, height / 2);
+        translate((width / 2), (height / 2));
+        translate(((mouseX - width / 2) / 10), (mouseY - height / 2) / 10);
+
         rotate(angle + frameCount);
 
         fill(100, saturation, brightness);
@@ -105,11 +109,12 @@ function radiant() {
     }
 
     for (let angle = 15; angle <= 360; angle += 30) {
-        // Save current coordinate system
+        // Save current coordinate syste8
         push();
 
         // Translate to center of canvas and rotate by angle
         translate(width / 2, height / 2);
+        translate((mouseX - width / 2) / 9, (mouseY - height / 2) / 9);
         rotate(angle + frameCount * 0.5);
 
         fill(200, saturation, brightness);
@@ -126,23 +131,23 @@ function eye() {
 
     fill(100, 50, 100)
 
-    triangle(width / 2 + 160, height / 2 - 65.2, width / 2 + 310, height / 2 + 38, width / 2 + 108.5, height / 2 + 86)
+    triangle((width / 2 + 151) + ((mouseX - width / 2) / 20), (height / 2 - 60) + (mouseY - height / 2) / 20, (width / 2 + 320) + ((mouseX - width / 2) / 20), (height / 2 + 38) + (mouseY - height / 2) / 20, (width / 2 + 88) + ((mouseX - width / 2) / 20), (height / 2 + 83) + (mouseY - height / 2) / 20)
 
-    triangle(width / 2 - 160, height / 2 - 65.2, width / 2 - 310, height / 2 + 38, width / 2 - 108.5, height / 2 + 86)
+    triangle((width / 2 - 151) + ((mouseX - width / 2) / 20), (height / 2 - 60) + (mouseY - height / 2) / 20, (width / 2 - 320) + ((mouseX - width / 2) / 20), (height / 2 + 38) + (mouseY - height / 2) / 20, (width / 2 - 88) + ((mouseX - width / 2) / 20), (height / 2 + 83) + (mouseY - height / 2) / 20)
 
     fill(100, 30, 100)
-    ellipse(width / 2, height / 2, 420, 200)
+    ellipse((width / 2) + ((mouseX - width / 2) / 15), (height / 2) + (mouseY - height / 2) / 15, 420, 200)
 
     fill(100, 10, 100)
-    ellipse(width / 2, height / 2, 200, 200)
+    ellipse((width / 2) + ((mouseX - width / 2) / 12), (height / 2) + (mouseY - height / 2) / 12, 200, 200)
 }
 
 // moves the eyelids
 function blink() {
-    translate(width / 2, height / 2);
+    translate((width / 2) + ((mouseX - width / 2) / 20), (height / 2) + (mouseY - height / 2) / 20);
     fill(10, 10, 10);
-    arc(0, 40, 650, 300, blinking1 + 180, -blinking1 + 0, OPEN);
-    arc(0, 40, 650, 130, blinking2 + 0, -blinking2 + 180, OPEN);
+    arc(0, 40, 650, 332, blinking1 + 180, -blinking1 + 0, OPEN);
+    arc(0, 40, 650, 162, blinking2 + 0, -blinking2 + 180, OPEN);
 
 
 }
@@ -154,8 +159,11 @@ function tiemrEnd() {
 
 // check ifthe mouse was pressed to activate other code
 function mousePressed() {
-    press = 1;
-    frameCount = 1
+
+    if (press === 0) {
+        frameCount = 1;
+        press = 1;
+    }
     setTimeout(tiemrEnd, timer);
 
 
